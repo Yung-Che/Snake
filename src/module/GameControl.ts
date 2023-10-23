@@ -15,7 +15,7 @@ class GameControl {
 
   constructor() {
     this.snake = new Snake();
-    this.scorePanel = new ScorePanel();
+    this.scorePanel = new ScorePanel(10, 2);
     this.food = new Food();
     this.init();
   }
@@ -59,12 +59,32 @@ class GameControl {
         break;
     }
 
-    this.snake.X = X;
-    this.snake.Y = Y;
+    // 檢查蛇是否吃到了食物
+    this.checkEat(X, Y);
+
+
+    try {
+      this.snake.X = X;
+      this.snake.Y = Y;
+    } catch (error) {
+      alert((error as Error).message + 'GAME OVER!');
+      this.isLive = false;
+    }
+
 
     this.isLive && setTimeout(this.run.bind(this), 300 - (this.scorePanel.level - 1) * 30);
+  }
 
-
+  // 定義一個方法，用來檢查蛇是否吃到了食物
+  checkEat(X: number, Y: number) {
+    if (X === this.food.X && Y === this.food.Y) {
+      // 食物的位置要進行重置
+      this.food.change();
+      // 分數增加
+      this.scorePanel.addScore();
+      // 蛇要增加一節
+      this.snake.addBody();
+    }
   }
 
 }
