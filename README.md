@@ -1,5 +1,5 @@
 # 介紹 
-貪食蛇小遊戲
+貪食蛇小遊戲.
 
 # Live Demo
 https://65368688cfb37a28eb92f12f--zippy-zuccutto-687081.netlify.app/
